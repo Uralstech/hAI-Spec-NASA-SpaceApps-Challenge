@@ -1,5 +1,5 @@
 from requests import get, Response
-from os import mkdir
+from os import mkdir, listdir, remove
 from os.path import dirname, abspath, join, isdir, isfile
 from pdfminer.pdfpage import PDFPage
 from pdfminer.layout import LAParams, LTPage
@@ -8,7 +8,6 @@ from pdfminer.converter import PDFPageAggregator
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from re import match, Match
-from shutil import rmtree
 from pickle import load, dump
 
 HERE: str = dirname(abspath(__file__))
@@ -19,10 +18,10 @@ PICKLE_CACHE: str = join(HERE, ".PickleCache/")
 PICKLE: bool = True
 
 # Older version of a standard
-PDF_1: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/B/0/Historical/nasa_std_5009.pdf"
+PDF_1: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/D-w/CHANGE-1/1/Historical/nasa-std-5005.pdf"
 
 # Next version of the standard
-PDF_2: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/B/0/Historical/nasa-std-5009a.pdf"
+PDF_2: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/D-w/CHANGE-1/1/Historical/nasa-std-5005b.pdf"
 
 # Get name, filepath of PDF 1 and 2
 PDF_1_NAME: str = PDF_1.split("/")[-1]
@@ -49,7 +48,7 @@ def cache_pdf(pdf: str, path: str) -> None:
     """
     request: Response = get(pdf, stream=True)
     with open(path, "wb") as file:
-        for chunk in request.iter_content(None, True):
+        for chunk in request.iter_content(None):
             file.write(chunk)
 
 def format_pdf(pdf: str) -> dict[str, str]:
@@ -126,8 +125,10 @@ if not isdir(DOCUMENT_CACHE):
 if not isdir(OUTPUT_DIR):
     mkdir(OUTPUT_DIR)
 else:
-    rmtree(OUTPUT_DIR)
-    mkdir(OUTPUT_DIR)
+    for file in listdir(OUTPUT_DIR):
+        standard: str = "_".join(file[7:].split("_")[:-1])
+        if standard == PDF_1_NAME_WITHOUT_EXTENSION:
+            remove(join(OUTPUT_DIR, file))
 
 if not isfile(PDF_1_PATH):
     print("Downloading PDF_1...")
