@@ -81,8 +81,6 @@ def format_pdf(pdf: str) -> dict[str, str]:
                 if isinstance(element, LTTextBoxHorizontal):
                     lines: list[str] = element.get_text().split('\n')
                     for line in lines:
-                        print(repr(line))  # Debugging line
-
                         line = line.strip()
                         # Skip empty lines
                         if not line:
