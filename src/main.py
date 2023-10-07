@@ -24,10 +24,11 @@ PDF_1_NAME: str = PDF_1.split("/")[-1]
 PDF_2_NAME: str = PDF_2.split("/")[-1]
 PDF_1_PATH: str = join(CACHE, PDF_1_NAME)
 PDF_2_PATH: str = join(CACHE, PDF_2_NAME)
+PDF_1_NAME_WITHOUT_EXTENSION: str = PDF_1_NAME.split(".")[0]
 
 # Get path for output dir and names for the prompt files.
 OUTPUT_DIR = join(HERE, "Outputs/")
-OUTPUT: str = join(OUTPUT_DIR, "Prompt_{0}.txt")
+OUTPUT: str = join(OUTPUT_DIR, "Prompt_{0}_{1}.txt")
 
 # Downloads the pdf.
 def cache_pdf(pdf: str, path: str) -> None:
@@ -120,14 +121,19 @@ else:
     mkdir(OUTPUT_DIR)
 
 if not isfile(PDF_1_PATH):
+    print("Downloading PDF_1...")
     cache_pdf(PDF_1, PDF_1_PATH)
 
 if not isfile(PDF_2_PATH):
+    print("Downloading PDF_2...")
     cache_pdf(PDF_2, PDF_2_PATH)
 
 # Format the standards
+print("Formatting the PDFs...")
 pdf_1: dict[str, str] = format_pdf(PDF_1_PATH)
 pdf_2: dict[str, str] = format_pdf(PDF_2_PATH)
+
+print("Generating prompts...")
 
 index: int = 0
 pdf_2_sections = pdf_2.keys()
@@ -136,7 +142,9 @@ for key, value in pdf_1.items():
         # Check if the section from v-A is there in v-B
         if key.split(",")[0].split()[0].strip() in section:
             # If so, write a new prompt file.
-            with open(str.format(OUTPUT, index), "w", encoding="utf-8") as file:
+            with open(str.format(OUTPUT, PDF_1_NAME_WITHOUT_EXTENSION, index), "w", encoding="utf-8") as file:
                 file.write(f"I am making an AI and need a dataset. I have these two pages of different versions of a document.\n\nVERSION A:\n{pdf_1[key]}\n\nVERSION B:\n{pdf_2[section]}\n\nI want you to compare the two versions, then create a dataset entry in the format described below:\n\n\\### Instruction:\n[Please put the page of version A here]\n\n\\### Output:\nSuggesting Changes: [Yes / No, depending on if there are changes between the pages]\nCurrent Language: [The language in version A that has been changed in version B]\nSuggested Language: [The language in version B that replaced the language in version A]\nReason For Change: [The possible reason for the change between version A and B]\n\nPlease set \"Suggested Changes\" as \"No\" if the two pages are completely different and not related in any way.")
             index += 1
             break
+
+print("Done!")
