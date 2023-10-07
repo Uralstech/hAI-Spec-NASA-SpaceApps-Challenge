@@ -19,10 +19,10 @@ PICKLE_CACHE: str = join(HERE, ".PickleCache/")
 PICKLE: bool = True
 
 # Older version of a standard
-PDF_1: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/B/0/Historical/nasa_std_5009.pdf"
+PDF_1: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/B-w/CHANGE-2/2/Historical/nasa-std-5001a.pdf"
 
 # Next version of the standard
-PDF_2: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/C/0/Historical/nasa-std-5009a.pdf"
+PDF_2: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/B-w/CHANGE-2/2/Historical/nasa-std-5001b.pdf"
 
 # Get filename, filepath, name and pickle filepath of PDF 1 and 2
 PDF_1_FILE: str = PDF_1.split("/")[-1]
