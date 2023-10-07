@@ -1,0 +1,164 @@
+I am making an AI and need a dataset. I have these two pages of different versions of a document.
+
+VERSION A:
+APPLICABLE DOCUMENTS
+2.1  General
+The documents listed in this section contain provisions that constitute requirements of this
+standard as cited in the text.
+The latest issuances of cited documents shall be used unless otherwise approved by the assigned
+Technical Authority.
+The applicable documents are accessible via the NASA Technical Standards System at
+http://standards.nasa.gov or directly from the Standards Developing Organizations or other
+document distributors.
+2.2  Government Documents
+NASA-STD-5019
+Fracture Control Requirements for Spaceflight Hardware
+NPR 7120.5
+NASA Program and Project Management Processes and
+Requirements
+(Copies of the above documents are available from any NASA installation library or document
+repository.)
+2.3
+Non-Government Documents
+NAS 410
+NAS Certification and Qualification of Nondestructive Test
+Personnel
+(Copies of the above document are available from the Aerospace Industries Association of
+America, Inc., 1250 Eye Street, N.W., Washington, DC 20005.)
+ASTM-E-1417
+Standard Practice for Liquid Penetrant Testing
+ASTM-E-1444
+Standard Practice for Magnetic Particle Testing
+APPROVED FOR PUBLIC RELEASE—DISTRIBUTION IS UNLIMITED
+8 of 28
+NASA-STD-5009
+ASTM-E-1742
+Standard Practice for Radiographic Examination
+ASTM-E-2375
+Standard Practice for Ultrasonic Examination of Wrought
+Products
+(Copies of the above documents are available from the American Society for Testing and
+Materials, 100 Bar Harbor Drive, West Conshohocken, PA 19428.)
+SAE-ARP-4402
+SAE-AS-4787
+SAE-AMS-2647
+Eddy Current Inspection of Open Fastener Holes in
+Aluminum Aircraft Structure
+Eddy Current Inspection of Circular Holes in Nonferrous
+Metallic Aircraft Engine Hardware
+Fluorescent Penetrant Inspection, Aircraft and Engine
+Component Maintenance
+(Copies of the above documents are available from SAE International, 400 Commonwealth
+Drive, Warrendale, PA 15096.)
+2.4  Order of Precedence
+This document establishes NDE requirements and guidance where fracture control is a requirement, but
+does not supersede nor waive established Agency requirements found in other documentation.  Conflicts
+between this standard and other requirements documents shall be resolved by the responsible technical
+authority.
+
+VERSION B:
+APPLICABLE DOCUMENTS
+2.1  General
+The documents  listed  in this  section contain  provisions  that constitute  requirements  of this
+NASA Technical Standard  as cited in the text.
+2.1.1  The latest issuances of cited documents  apply  unless specific versions  are designated.
+2.1.2  Non-use of a specifically  designated  version  is approved by the delegated Technical
+Authority.
+Applicable  documents may be accessed at https://standards.nasa.gov  or obtained  directly  from
+the Standards Developing  Body or other document  distributors.  When not available  from these
+sources, information  for obtaining  the document  is provided.
+Refer to Appendix  C for reference documents.
+2.2  Government Documents
+National Aeronautics and Space Administration
+NPR 1441.1
+NASA Records Management  Program Requirements
+APPROVED FOR PUBLIC RELEASE – DISTRIBUTION IS UNLIMITED
+8 of 52
+NASA-STD-5009A
+NPR 7120.5
+NASA Program and Project Management Processes and
+Requirements
+NPR 7120.10
+Technical  Standards for NASA Programs and Projects
+NASA-STD-5019A
+Fracture Control  Requirements  for Spaceflight  Hardware
+2.3  Non-Government Documents
+Aerospace Industries Association (AIA)/National Aerospace Standards (NAS)
+NAS 410
+NAS Certification  and Qualification  of Nondestructive  Test
+Personnel
+American Society for Nondestructive Testing
+Materials  Evaluation,
+Volume  40, No. 9,  1982
+“Recommended  Practice for a Demonstration  of
+Nondestructive  Evaluation  (NDE) Reliability  on Aircraft
+Production  Parts,” Ward Rummel
+American Society for Testing and Materials (ASTM)
+ASTM E164
+ASTM E1025
+Standard Practice for Contact Ultrasonic  Testing  of
+Weldments
+Standard Practice for Design,  Manufacture, and Material
+Grouping  Classification  of Hole-Type Image Quality
+Indicators  (IQI) Used for Radiology
+ASTM E1316
+Standard Terminology  for Nondestructive Examinations
+ASTM E1417/E1417M
+Standard Practice for Liquid  Penetrant Testing
+ASTM E1444/E1444M
+Standard Practice for Magnetic  Particle Testing
+ASTM E1742
+Standard Practice for Radiographic  Examination
+ASTM E1817
+ASTM E2033
+Standard Practice for Controlling  Quality  of Radiological
+Examination  by Using  Representative Quality  Indicators
+(RQIs)
+Standard Practice for Radiographic  Examination  Using
+Computed  Radiography  (Photostimulable  Luminescence
+Method)
+APPROVED FOR PUBLIC RELEASE – DISTRIBUTION IS UNLIMITED
+9 of 52
+NASA-STD-5009A
+ASTM E2375
+Standard Practice for Ultrasonic  Examination  of Wrought
+Products
+ASTM E2445/E2445M
+Standard Practice for Performance Evaluation  and Long-
+Term Stability  of Computer  Radiography  Systems
+ASTM E2698
+ASTM E2737
+SAE International
+SAE AMS2647
+SAE ARP4402
+SAE AS4787
+Standard Practice for Radiological  Examination  Using
+Digital  Detector Arrays
+Standard Practice for Digital  Detector Array Performance
+Evaluation  and Long-Term  Stability
+Fluorescent  Penetrant Inspection  Aircraft and Engine
+Component  Maintenance
+Eddy Current Inspection  of Open Fastener Holes in
+Aluminum  Aircraft Structure
+Eddy Current Inspection  of Circular  Holes in  Nonferrous
+Metallic  Aircraft Engine  Hardware
+2.4  Order of Precedence
+2.4.1  The requirements  and standard practices established  in this NASA Technical  Standard do
+not supersede or waive  existing  requirements  and standard practices found  in other Agency
+documentation,  or in applicable  laws and regulations  unless a specific  exemption  has been
+obtained  by the Office of the NASA Chief Engineer.
+2.4.2  Conflicts  between this  NASA Technical  Standard and other requirements  documents  are
+resolved  by the delegated  Technical Authority.
+
+I want you to compare the two versions, then create a dataset entry in the format described below:
+
+\### Instruction:
+[Please put the page of version A here]
+
+\### Output:
+Suggesting Changes: [Yes / No, depending on if there are changes between the pages]
+Current Language: [The language in version A that has been changed in version B]
+Suggested Language: [The language in version B that replaced the language in version A]
+Reason For Change: [The possible reason for the change between version A and B]
+
+Please set "Suggested Changes" as "No" if the two pages are completely different and not related in any way.
