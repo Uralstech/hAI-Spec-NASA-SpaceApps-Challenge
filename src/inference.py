@@ -18,6 +18,7 @@ prompt: str = "### Instruction:\nPurpose\nThe purpose of this standard is to est
 pipeline = pipeline(
     "text-generation",
     model=model,
+    tokenizer=tokenizer,
     torch_dtype=torch.float16,
     device_map="auto",
 )
