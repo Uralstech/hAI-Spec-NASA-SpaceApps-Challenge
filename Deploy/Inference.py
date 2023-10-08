@@ -9,6 +9,7 @@ from fastapi import UploadFile
 from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from uvicorn import run
 from ..Common.PDFFormatter import format_pdf
 
 class ModelOutput(BaseModel):
@@ -51,3 +52,6 @@ async def inference(file: UploadFile):
         output.append(sequences['generated_text'])
     
     return output
+
+if __name__ == "__main__":
+    run(app, host="0.0.0.0", port=8080)
