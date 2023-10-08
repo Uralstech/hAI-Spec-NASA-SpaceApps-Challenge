@@ -37,7 +37,7 @@ pipeline = pipeline(
 app: FastAPI = FastAPI(title="hAI! Spec", version="1.0.0")
 app.add_middleware(CORSMiddleware, allow_methods=["*"], allow_origins=["*"])
 
-@app.post("/api/instruct/", response_model=ModelOutput)
+@app.post("/api/instruct", response_model=ModelOutput)
 async def inference(file: UploadFile):
     data = format_pdf(file)
     output: list[str] = []

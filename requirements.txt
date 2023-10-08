@@ -5,3 +5,4 @@ fastapi
 uvicorn
 sse-starlette
 pydantic
+python-multipart
