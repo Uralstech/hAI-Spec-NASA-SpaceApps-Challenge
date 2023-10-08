@@ -10,6 +10,8 @@ from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn import run
+from io import BytesIO
+
 from ..Common.PDFFormatter import format_pdf
 
 class ModelOutput(BaseModel):
@@ -38,19 +40,22 @@ app: FastAPI = FastAPI(title="hAI! Spec", version="1.0.0")
 app.add_middleware(CORSMiddleware, allow_methods=["*"], allow_origins=["*"])
 
 @app.post("/api/instruct", response_model=ModelOutput)
-async def inference(file: UploadFile):
-    data = format_pdf(file)
+def inference(file: UploadFile):
+    print(f"Processing request!")
+
+    file_bytes = BytesIO(file.file.read())
+    data = format_pdf(file_bytes)
     output: list[str] = []
     for value in data.values():
         sequences = pipeline(
             str.format(prompt_template, value),
             num_return_sequences=1,
-            repetition_penalty=1.01,
             max_new_tokens=4096,
         )
 
-        output.append(sequences['generated_text'])
+        output.append(sequences[0]['generated_text'])
     
+    print("Sending request!")
     return output
 
 if __name__ == "__main__":

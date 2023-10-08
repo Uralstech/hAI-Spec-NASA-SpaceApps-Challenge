@@ -5,6 +5,7 @@ from pdfminer.converter import PDFPageAggregator
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from re import match, Match
+from io import BytesIO
 
 # Regex patterns
 REGEX_SPLIT_SECTION_1: str = r'^\d+\.\d+(\.\d+)?\s*$'
@@ -29,7 +30,7 @@ def __split_and_trim(sections: dict[str, str]) -> tuple[dict[str, list[str]], li
 
     return split_sections, tuple(split_sections.values())[0]
 
-def format_pdf(document) -> dict[str, str]:
+def format_pdf(document: BytesIO) -> dict[str, str]:
     """
     Formats the standard's PDF into a dictionary of sections.
 
