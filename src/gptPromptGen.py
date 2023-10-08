@@ -10,6 +10,7 @@ from pdfminer.pdfinterp import PDFResourceManager
 from re import match, Match
 from pickle import load, dump
 from shutil import rmtree
+import argparse
 
 HERE: str = dirname(abspath(__file__))
 DOCUMENT_CACHE: str = join(HERE, ".DocsCache/")
@@ -23,6 +24,15 @@ PDF_1: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/C/0/
 
 # Next version of the standard
 PDF_2: str = "https://standards.nasa.gov/sites/default/files/standards/NASA/C/0/2023-08-03-NASA-STD-5009C-Approved.pdf"
+
+# Checks program arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("-p1", "--pdf_1", type=str, help="The link to pdf_1.", required=False)
+parser.add_argument("-p2", "--pdf_2", type=str, help="The link to pdf_2.", required=False)
+args = parser.parse_args()
+
+PDF_1 = args.pdf_1 if args.pdf_1 else PDF_1
+PDF_2 = args.pdf_2 if args.pdf_2 else PDF_2
 
 # Get filename, filepath, name and pickle filepath of PDF 1 and 2
 PDF_1_FILE: str = PDF_1.split("/")[-1]
@@ -40,9 +50,10 @@ SUB_OUTPUT_DIR: str = join(ALL_OUTPUT_DIR, PDF_1_NAME)
 OUTPUT: str = join(SUB_OUTPUT_DIR, "Prompt_{0}_{1}.txt")
 
 # Regex patterns
-REGEX_SPLIT_SECTION_1: str = r'^(\d+)\.(\d+)$'
-REGEX_SPLIT_SECTION_2: str = r'^([a-zA-Z]+(,? [a-zA-Z]+)?)+$'
-REGEX_FULL_SECTION: str = r'^(\d+)\.(\d+)\s+([a-zA-Z]+(,? [a-zA-Z]+)?)+$'
+REGEX_SPLIT_SECTION_1: str = r'^\d+\.\d+(\.\d+)?\s*$'
+REGEX_SPLIT_SECTION_2: str = r'^([a-zA-Z]+(?:\s*,\s*[a-zA-Z]+)*)$'
+REGEX_FULL_SECTION: str = r'^(\d+)\.(\d+)\s*([a-zA-Z]+(?:\s*,\s*[a-zA-Z]+)*)$'
+REGEX_FULL_SECTION_SN: str = r'^\d+\.\d+(\.\d+)?\s*'
 
 # Downloads the pdf.
 def cache_pdf(pdf: str, path: str) -> None:
@@ -106,7 +117,7 @@ def format_pdf(pdf: str) -> dict[str, str]:
 
                         section_match: Match[str] | None = match(REGEX_FULL_SECTION, line)
                         if section_match and not append_next_line:
-                            current_section = line
+                            current_section = line[match(REGEX_FULL_SECTION_SN, line).end():]
                             sections[current_section] = current_section
                             continue
                         else:
@@ -129,6 +140,13 @@ def format_pdf(pdf: str) -> dict[str, str]:
                         # Add content to the current section
                         if current_section and not append_next_line:
                             sections[current_section] += "\n" + line
+
+    to_del: list[str] =  []
+    for i in sections.keys():
+        if len(sections[i].split("\n")) > 100:
+            to_del.append(i)
+    for i in to_del:
+        del sections[i]
 
     return sections
 
