@@ -1,3 +1,7 @@
+"""
+Utility to download and create GPT prompts of most NASA 5000 series standards.
+"""
+
 from os import system
 from os.path import join, dirname, abspath
 

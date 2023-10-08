@@ -1,3 +1,5 @@
+# Script to train hAI! Spec.
+
 autotrain llm --train --project_name hAI-Spec-Nasa-SpaceApps-Challenge --data_path ./Data/ --model abhishek/llama-2-7b-hf-small-shards --learning_rate 2e-4 --num_train_epochs 40 --train_batch_size 4 --gradient_accumulation_steps 16 --optimizer adamw_bnb_8bit --weight_decay 0.01 --use_peft --fp16 --use_int4 --trainer sft --text_column Text --model_max_length 8100
 
 #####################################################################################

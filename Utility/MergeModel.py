@@ -1,3 +1,7 @@
+"""
+Utility to merge the trained model (hAI! Spec) with the original model.
+"""
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel

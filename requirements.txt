@@ -1,3 +1,7 @@
 pdfminer
 pdfminer.six
 requests
+fastapi
+uvicorn
+sse-starlette
+pydantic
