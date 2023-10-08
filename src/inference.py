@@ -2,7 +2,7 @@
 from transformers import LlamaTokenizer, LlamaForCausalLM, pipeline
 import torch
 
-REPO_ID: str = "uralstech/hAI-Spec-Nasa-SpaceApps-Challenge"
+REPO_ID: str = "uralstech/hAI-Spec-Merged"
 
 model = LlamaForCausalLM.from_pretrained(
 	REPO_ID,
