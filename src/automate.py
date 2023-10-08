@@ -4,6 +4,18 @@ from os.path import join, dirname, abspath
 PROMPT_GEN: str = join(dirname(abspath(__file__)), "gptPromptGen.py")
 links: tuple[tuple[str]] = (
     (
+        "https://standards.nasa.gov/sites/default/files/standards/NASA/B/0/Historical/nasa_std_5009.pdf",
+        "https://standards.nasa.gov/sites/default/files/standards/NASA/B/0/Historical/nasa-std-5009a.pdf"
+    ),
+    (
+        "https://standards.nasa.gov/sites/default/files/standards/NASA/B/0/Historical/nasa-std-5009a.pdf",
+        "https://standards.nasa.gov/sites/default/files/standards/NASA/C/0/Historical/nasa-std-5009b.pdf"
+    ),
+    (
+        "https://standards.nasa.gov/sites/default/files/standards/NASA/C/0/Historical/nasa-std-5009b.pdf",
+        "https://standards.nasa.gov/sites/default/files/standards/NASA/C/0/2023-08-03-NASA-STD-5009C-Approved.pdf",
+    ),
+    (
         "https://standards.nasa.gov/sites/default/files/standards/NASA/Baseline-w/CHANGE-2/2/Historical/nasa-spec-5022_w-change_1_revalidation.pdf",
         "https://standards.nasa.gov/sites/default/files/standards/NASA/Baseline-w/CHANGE-2/2/Historical/2015-06-24_NASA-SPEC-5022_Published.pdf"
     ),

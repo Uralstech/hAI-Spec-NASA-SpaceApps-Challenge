@@ -54,6 +54,8 @@ REGEX_SPLIT_SECTION_1: str = r'^\d+\.\d+(\.\d+)?\s*$'
 REGEX_SPLIT_SECTION_2: str = r'^([a-zA-Z]+(?:\s*,\s*[a-zA-Z]+)*)$'
 REGEX_FULL_SECTION: str = r'^(\d+)\.(\d+)\s*([a-zA-Z]+(?:\s*,\s*[a-zA-Z]+)*)$'
 REGEX_FULL_SECTION_SN: str = r'^\d+\.\d+(\.\d+)?\s*'
+REGEX_TITLE: str = r"^\s*NASA-STD-5\d\d\d\w?\s*$"
+REGEX_PAGE: str = r"^\s*(\d+)\s+of\s+(\d+)\s*$"
 
 # Downloads the pdf.
 def cache_pdf(pdf: str, path: str) -> None:
@@ -112,7 +114,7 @@ def format_pdf(pdf: str) -> dict[str, str]:
                     for line in lines:
                         line = line.strip()
                         # Skip empty lines
-                        if not line:
+                        if not line or match(REGEX_TITLE, line) or match(REGEX_PAGE, line):
                             continue
 
                         section_match: Match[str] | None = match(REGEX_FULL_SECTION, line)
@@ -212,7 +214,7 @@ for key, value in pdf_1.items():
         if key.split(",")[0].split()[0].strip() in section:
             # If so, write a new prompt file.
             with open(str.format(OUTPUT, PDF_1_NAME, index), "w", encoding="utf-8") as file:
-                file.write(f"I am making an AI and need a dataset. I have these two pages of different versions of a document.\n\nVERSION A:\n{pdf_1[key]}\n\nVERSION B:\n{pdf_2[section]}\n\nI want you to compare the two versions, then create a dataset entry in the format described below:\n\n\\### Instruction:\n[Please put the page of version A here]\n\n\\### Output:\nSuggesting Changes: [Yes / No, depending on if there are changes between the pages]\nCurrent Language: [The language in version A that has been changed in version B]\nSuggested Language: [The language in version B that replaced the language in version A]\nReason For Change: [The possible reason for the change between version A and B]\n\nPlease set \"Suggested Changes\" as \"No\" if the two pages are completely different and not related in any way.")
+                file.write(f"I am making an AI and need a dataset. I have these two pages of different versions of a document.\n\nVERSION A:\n{pdf_1[key]}\n\nVERSION B:\n{pdf_2[section]}\n\nI want you to compare the two versions, then create a dataset entry in the format described below:\n\n\\### Output:\nSuggesting Changes: [Yes / No, depending on if there are changes between the pages]\n\n[Below are the main parameters. Provide them multiple times depending on the amount of changes. Set them as 'N/A' if there are no changes between A and B.]\nCurrent Language: [The language in version A that has been changed in version B]\nSuggested Language: [The language in version B that replaced the language in version A]\nReason For Change: [The possible reason for the change between version A and B]")
             index += 1
             break
 
