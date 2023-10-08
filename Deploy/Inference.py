@@ -9,7 +9,7 @@ from fastapi import UploadFile
 from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from Common.common import format_pdf
+from ..Common.PDFFormatter import format_pdf
 
 class ModelOutput(BaseModel):
     output: list[str]

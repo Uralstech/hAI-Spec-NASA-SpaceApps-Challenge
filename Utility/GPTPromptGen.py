@@ -8,7 +8,7 @@ from os.path import dirname, abspath, join, isdir, isfile
 from pickle import load, dump
 from shutil import rmtree
 from argparse import ArgumentParser
-from Common.common import format_pdf
+from ..Common.PDFFormatter import format_pdf
 
 # Source and cache paths
 HERE: str = dirname(abspath(__file__))
